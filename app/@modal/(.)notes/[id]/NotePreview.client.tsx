@@ -17,22 +17,24 @@ function NotePreview({ note }: NotePreviewProps) {
   const close = () => router.back();
 
   return (
-    <div className={css.container}>
-      <div className={css.item}>
-        <div className={css.header}>
-          <h2>{note.title}</h2>
-          <span className={css.tag}>{note.tag}</span>
+    <div className={css.overlay}>
+      <div className={css.container}>
+        <div className={css.item}>
+          <div className={css.header}>
+            <h2>{note.title}</h2>
+            <span className={css.tag}>{note.tag}</span>
+          </div>
+
+          <p className={css.content}>{note.content}</p>
+
+          <div className={css.date}>
+            {new Date(note.createdAt).toLocaleDateString()}
+          </div>
+
+          <button className={css.backBtn} onClick={close}>
+            ← Back
+          </button>
         </div>
-
-        <p className={css.content}>{note.content}</p>
-
-        <div className={css.date}>
-          {new Date(note.createdAt).toLocaleDateString()}
-        </div>
-
-        <button className={css.backBtn} onClick={close}>
-          ← Back
-        </button>
       </div>
     </div>
   );

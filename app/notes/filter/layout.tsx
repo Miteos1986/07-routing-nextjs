@@ -5,10 +5,12 @@ type NotesLayoutProps = {
 
 const NotesLayout = ({ children, sidebar }: NotesLayoutProps) => {
   return (
-    <section>
-      <aside>{sidebar}</aside>
-      <div>{children}</div>
-    </section>
+    <>
+      <section>
+        <aside>{sidebar}</aside>
+        <div>{children}</div>
+      </section>
+    </>
   );
 };
 

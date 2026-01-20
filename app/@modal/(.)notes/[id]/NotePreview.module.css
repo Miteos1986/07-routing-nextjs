@@ -1,12 +1,25 @@
+/* overlay на весь экран */
+.overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* сама модалка */
 .container {
   max-width: 800px;
-  margin: 32px auto;
+  margin: 0;
   padding: 24px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* карточка внутри модалки */
 .item {
   display: flex;
   flex-direction: column;

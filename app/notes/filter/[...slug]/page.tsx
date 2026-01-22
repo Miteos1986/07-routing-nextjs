@@ -5,12 +5,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface NotesByTagProps {
-  params: Promise<{ tag: string[] }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 const NotesByTag = async ({ params }: NotesByTagProps) => {
-  const { tag } = await params;
-  const currentTag = tag[0];
+  const { slug } = await params;
+  const currentTag = slug[0];
 
   const VALID_TAGS = ["all", "Work", "Personal", "Meeting", "Shopping", "Todo"];
 
@@ -21,7 +21,7 @@ const NotesByTag = async ({ params }: NotesByTagProps) => {
     1,
     10,
     "",
-    currentTag === "all" ? undefined : currentTag
+    currentTag === "all" ? undefined : currentTag,
   );
 
   return (

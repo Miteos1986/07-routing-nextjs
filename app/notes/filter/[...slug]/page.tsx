@@ -29,7 +29,12 @@ const NotesByTag = async ({ params }: NotesByTagProps) => {
 
   await queryClient.prefetchQuery({
     queryKey: ["notes", 1, currentTag],
-    queryFn: () => fetchNotes(1, 12, currentTag === "all" ? "" : currentTag),
+    queryFn: () =>
+      fetchNotes({
+        page: 1,
+        perPage: 12,
+        search: currentTag === "all" ? "" : currentTag,
+      }),
   });
 
   return (

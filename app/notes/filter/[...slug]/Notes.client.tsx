@@ -25,11 +25,15 @@ export default function NotesClient({ tag }: NotesClientProps) {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const query = search || tag;
-
   const { data, isSuccess, isFetching, isError } = useQuery({
-    queryKey: ["notes", page, query],
-    queryFn: () => fetchNotes(page, perPage, query),
+    queryKey: ["notes", page, search, tag],
+    queryFn: () =>
+      fetchNotes({
+        page,
+        perPage,
+        search,
+        tag,
+      }),
     placeholderData: keepPreviousData,
   });
 

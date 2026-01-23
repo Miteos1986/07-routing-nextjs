@@ -11,17 +11,35 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-export const fetchNotes = async (
-  page: number,
-  perPage: number,
-  search: string,
-  tag?: string
-): Promise<FetchNotesResponse> => {
+export const fetchNotes = async ({
+  page,
+  perPage,
+  search,
+  tag,
+}: {
+  page: number;
+  perPage: number;
+  search?: string;
+  tag?: string;
+}): Promise<FetchNotesResponse> => {
+  const params: Record<string, string | number> = {
+    page,
+    perPage,
+  };
+
+  if (search && search !== "") {
+    params.search = search;
+  }
+
+  if (tag && tag !== "") {
+    params.tag = tag;
+  }
+
   const response = await API.get<FetchNotesResponse>("/notes", {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
     },
-    params: { page, perPage, search, tag },
+    params,
   });
 
   return response.data;

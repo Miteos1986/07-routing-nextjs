@@ -1,20 +1,27 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
 import css from "@/app/@modal/(.)notes/[id]/NotePreview.module.css";
+import { fetchNoteById } from "@/lib/api";
 
-interface NotePreviewProps {
-  note: {
-    title: string;
-    content: string;
-    tag: string;
-    createdAt: string;
-  };
-}
-
-function NotePreview({ note }: NotePreviewProps) {
+function NotePreview() {
   const router = useRouter();
+  const { id } = useParams<{ id: string }>();
+
   const close = () => router.back();
+
+  const {
+    data: note,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["note", id],
+    queryFn: () => fetchNoteById(id),
+  });
+
+  if (isLoading) return null;
+  if (isError || !note) return <p>Error loading note</p>;
 
   return (
     <div className={css.overlay}>
